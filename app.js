@@ -74,31 +74,30 @@ app.get("/searchblog", (req, res) => {
 
 //!ROUTES
 app.get("/", (req, res) => {
-  const blogs = [
-    {
-      title: "Yoshi finds eggs",
-      snippet: "Lorem ipsum dolor sit amet consectetur",
-    },
-    {
-      title: "Mario finds stars",
-      snippet: "Lorem ipsum dolor sit amet consectetur",
-    },
-    {
-      title: "How to defeat bowser",
-      snippet: "Lorem ipsum dolor sit amet consectetur",
-    },
-  ];
-  res.status(200).render("index", { title: "Home", blogs });
+  res.redirect("/blogs");
 });
 
 app.get("/about", (req, res) => {
   res.status(200).render("about", { title: "About" });
 });
 
+// blogs routes
 app.get("/blogs/create", (req, res) => {
   res.status(200).render("create", { title: "Create blog" });
 });
 
+app.get("/blogs", (req, res) => {
+  Blog.find()
+    .sort({ createdAt: -1 })
+    .then((result) => {
+      res.render("index", { title: "My blogs", blogs: result });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+//Error page rendering
 app.use((req, res) => {
   res.status(404).render("404", { title: "Not found" });
 });
