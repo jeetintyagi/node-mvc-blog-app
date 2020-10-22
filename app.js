@@ -8,7 +8,7 @@ const morgan = require("morgan");
 
 //Connecting MongoDB database
 const dbURI =
-  "mongodb+srv://jeetintyagi:Q6jAMuonLU98Atqg@cluster0.ja2ir.mongodb.net/node-blog-app?retryWrites=true&w=majority";
+  "mongodb+srv://--------------------------------------your-URI------------------------------------";
 mongoose
   .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => {
